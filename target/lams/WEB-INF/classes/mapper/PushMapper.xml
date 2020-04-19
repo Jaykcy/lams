@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xhjsj.mapper.PushMapper" >
+  <resultMap id="BaseResultMap" type="com.xhjsj.domain.Push" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="reqnumber" property="reqnumber" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="messagetype" property="messagetype" jdbcType="VARCHAR" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="readed" property="readed" jdbcType="BIT" />
+    <result column="receiver" property="receiver" jdbcType="VARCHAR" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP" />
+    <result column="attri_Text01" property="attriText01" jdbcType="VARCHAR" />
+    <result column="attri_Text02" property="attriText02" jdbcType="VARCHAR" />
+    <result column="attri_Text03" property="attriText03" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, reqnumber, role, messagetype, message, readed, receiver, created_by, reason, 
+    created_date, updated_date, attri_Text01, attri_Text02, attri_Text03
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xhjsj.domain.PushExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from push
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.xhjsj.domain.PushExample" >
+    delete from push
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xhjsj.domain.Push" >
+    insert into push (id, reqnumber, role, 
+      messagetype, message, readed, 
+      receiver, created_by, reason, 
+      created_date, updated_date, attri_Text01, 
+      attri_Text02, attri_Text03)
+    values (#{id,jdbcType=INTEGER}, #{reqnumber,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
+      #{messagetype,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, #{readed,jdbcType=BIT}, 
+      #{receiver,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{updatedDate,jdbcType=TIMESTAMP}, #{attriText01,jdbcType=VARCHAR}, 
+      #{attriText02,jdbcType=VARCHAR}, #{attriText03,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xhjsj.domain.Push" >
+    insert into push
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="reqnumber != null" >
+        reqnumber,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="messagetype != null" >
+        messagetype,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="readed != null" >
+        readed,
+      </if>
+      <if test="receiver != null" >
+        receiver,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="updatedDate != null" >
+        updated_date,
+      </if>
+      <if test="attriText01 != null" >
+        attri_Text01,
+      </if>
+      <if test="attriText02 != null" >
+        attri_Text02,
+      </if>
+      <if test="attriText03 != null" >
+        attri_Text03,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="reqnumber != null" >
+        #{reqnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetype != null" >
+        #{messagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="readed != null" >
+        #{readed,jdbcType=BIT},
+      </if>
+      <if test="receiver != null" >
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDate != null" >
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attriText01 != null" >
+        #{attriText01,jdbcType=VARCHAR},
+      </if>
+      <if test="attriText02 != null" >
+        #{attriText02,jdbcType=VARCHAR},
+      </if>
+      <if test="attriText03 != null" >
+        #{attriText03,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xhjsj.domain.PushExample" resultType="java.lang.Integer" >
+    select count(*) from push
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateById" parameterType="java.lang.String">
+    update push
+    set readed = true
+    where 1 = 1
+    and id in #{ids}
+  </update>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update push
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.reqnumber != null" >
+        reqnumber = #{record.reqnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null" >
+        role = #{record.role,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messagetype != null" >
+        messagetype = #{record.messagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readed != null" >
+        readed = #{record.readed,jdbcType=BIT},
+      </if>
+      <if test="record.receiver != null" >
+        receiver = #{record.receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdBy != null" >
+        created_by = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDate != null" >
+        created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedDate != null" >
+        updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.attriText01 != null" >
+        attri_Text01 = #{record.attriText01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attriText02 != null" >
+        attri_Text02 = #{record.attriText02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attriText03 != null" >
+        attri_Text03 = #{record.attriText03,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update push
+    set id = #{record.id,jdbcType=INTEGER},
+      reqnumber = #{record.reqnumber,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=VARCHAR},
+      messagetype = #{record.messagetype,jdbcType=VARCHAR},
+      message = #{record.message,jdbcType=VARCHAR},
+      readed = #{record.readed,jdbcType=BIT},
+      receiver = #{record.receiver,jdbcType=VARCHAR},
+      created_by = #{record.createdBy,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+      updated_date = #{record.updatedDate,jdbcType=TIMESTAMP},
+      attri_Text01 = #{record.attriText01,jdbcType=VARCHAR},
+      attri_Text02 = #{record.attriText02,jdbcType=VARCHAR},
+      attri_Text03 = #{record.attriText03,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

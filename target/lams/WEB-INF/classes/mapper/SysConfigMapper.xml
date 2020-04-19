@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xhjsj.mapper.SysConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.xhjsj.domain.SysConfig" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MODULAR" property="modular" jdbcType="VARCHAR" />
+    <result column="CONFIG_KEY" property="configKey" jdbcType="VARCHAR" />
+    <result column="CONFIG_VALUE" property="configValue" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="ATTRI_TEXT01" property="attriText01" jdbcType="VARCHAR" />
+    <result column="ATTRI_TEXT02" property="attriText02" jdbcType="VARCHAR" />
+    <result column="ATTRI_TEXT03" property="attriText03" jdbcType="VARCHAR" />
+    <result column="ATTRI_TEXT04" property="attriText04" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MODULAR, CONFIG_KEY, CONFIG_VALUE, REMARK, UPDATE_DATE, ATTRI_TEXT01, ATTRI_TEXT02, 
+    ATTRI_TEXT03, ATTRI_TEXT04
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xhjsj.domain.SysConfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_config
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_config
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xhjsj.domain.SysConfigExample" >
+    delete from sys_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xhjsj.domain.SysConfig" >
+    insert into sys_config (ID, MODULAR, CONFIG_KEY, 
+      CONFIG_VALUE, REMARK, UPDATE_DATE, 
+      ATTRI_TEXT01, ATTRI_TEXT02, ATTRI_TEXT03, 
+      ATTRI_TEXT04)
+    values (#{id,jdbcType=INTEGER}, #{modular,jdbcType=VARCHAR}, #{configKey,jdbcType=VARCHAR}, 
+      #{configValue,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{attriText01,jdbcType=VARCHAR}, #{attriText02,jdbcType=VARCHAR}, #{attriText03,jdbcType=VARCHAR}, 
+      #{attriText04,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xhjsj.domain.SysConfig" >
+    insert into sys_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="modular != null" >
+        MODULAR,
+      </if>
+      <if test="configKey != null" >
+        CONFIG_KEY,
+      </if>
+      <if test="configValue != null" >
+        CONFIG_VALUE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE,
+      </if>
+      <if test="attriText01 != null" >
+        ATTRI_TEXT01,
+      </if>
+      <if test="attriText02 != null" >
+        ATTRI_TEXT02,
+      </if>
+      <if test="attriText03 != null" >
+        ATTRI_TEXT03,
+      </if>
+      <if test="attriText04 != null" >
+        ATTRI_TEXT04,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="modular != null" >
+        #{modular,jdbcType=VARCHAR},
+      </if>
+      <if test="configKey != null" >
+        #{configKey,jdbcType=VARCHAR},
+      </if>
+      <if test="configValue != null" >
+        #{configValue,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attriText01 != null" >
+        #{attriText01,jdbcType=VARCHAR},
+      </if>
+      <if test="attriText02 != null" >
+        #{attriText02,jdbcType=VARCHAR},
+      </if>
+      <if test="attriText03 != null" >
+        #{attriText03,jdbcType=VARCHAR},
+      </if>
+      <if test="attriText04 != null" >
+        #{attriText04,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xhjsj.domain.SysConfigExample" resultType="java.lang.Integer" >
+    select count(*) from sys_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_config
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.modular != null" >
+        MODULAR = #{record.modular,jdbcType=VARCHAR},
+      </if>
+      <if test="record.configKey != null" >
+        CONFIG_KEY = #{record.configKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.configValue != null" >
+        CONFIG_VALUE = #{record.configValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        UPDATE_DATE = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.attriText01 != null" >
+        ATTRI_TEXT01 = #{record.attriText01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attriText02 != null" >
+        ATTRI_TEXT02 = #{record.attriText02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attriText03 != null" >
+        ATTRI_TEXT03 = #{record.attriText03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attriText04 != null" >
+        ATTRI_TEXT04 = #{record.attriText04,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_config
+    set ID = #{record.id,jdbcType=INTEGER},
+      MODULAR = #{record.modular,jdbcType=VARCHAR},
+      CONFIG_KEY = #{record.configKey,jdbcType=VARCHAR},
+      CONFIG_VALUE = #{record.configValue,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      UPDATE_DATE = #{record.updateDate,jdbcType=TIMESTAMP},
+      ATTRI_TEXT01 = #{record.attriText01,jdbcType=VARCHAR},
+      ATTRI_TEXT02 = #{record.attriText02,jdbcType=VARCHAR},
+      ATTRI_TEXT03 = #{record.attriText03,jdbcType=VARCHAR},
+      ATTRI_TEXT04 = #{record.attriText04,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xhjsj.domain.SysConfig" >
+    update sys_config
+    <set >
+      <if test="modular != null" >
+        MODULAR = #{modular,jdbcType=VARCHAR},
+      </if>
+      <if test="configKey != null" >
+        CONFIG_KEY = #{configKey,jdbcType=VARCHAR},
+      </if>
+      <if test="configValue != null" >
+        CONFIG_VALUE = #{configValue,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attriText01 != null" >
+        ATTRI_TEXT01 = #{attriText01,jdbcType=VARCHAR},
+      </if>
+      <if test="attriText02 != null" >
+        ATTRI_TEXT02 = #{attriText02,jdbcType=VARCHAR},
+      </if>
+      <if test="attriText03 != null" >
+        ATTRI_TEXT03 = #{attriText03,jdbcType=VARCHAR},
+      </if>
+      <if test="attriText04 != null" >
+        ATTRI_TEXT04 = #{attriText04,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xhjsj.domain.SysConfig" >
+    update sys_config
+    set MODULAR = #{modular,jdbcType=VARCHAR},
+      CONFIG_KEY = #{configKey,jdbcType=VARCHAR},
+      CONFIG_VALUE = #{configValue,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      ATTRI_TEXT01 = #{attriText01,jdbcType=VARCHAR},
+      ATTRI_TEXT02 = #{attriText02,jdbcType=VARCHAR},
+      ATTRI_TEXT03 = #{attriText03,jdbcType=VARCHAR},
+      ATTRI_TEXT04 = #{attriText04,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
