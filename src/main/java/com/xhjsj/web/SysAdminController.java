@@ -94,7 +94,16 @@ public class SysAdminController {
         user.setuClass(sysuser.getuClass());
         user.setRole(sysuser.getRole());
         user.setDeptName(sysuser.getDeptName());
-        sysAdminService.addSysUser(user);
+        try {
+            sysAdminService.addSysUser(user);
+        } catch (Exception e) {
+            //e.printStackTrace();
+            AjaxResult ajaxResult = AjaxResult.success();
+            ajaxResult.put("message", sysuser.getRole()+":"+sysuser.getUserName()+"添加失败");
+            ajaxResult.put("success", true);
+            ajaxResult.put("result", "Y");
+            return ajaxResult;
+        }
         AjaxResult ajaxResult = AjaxResult.success();
         ajaxResult.put("message", sysuser.getRole()+":"+sysuser.getUserName()+"添加成功");
         ajaxResult.put("success", true);
