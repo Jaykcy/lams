@@ -150,7 +150,7 @@ public class SysAdminController {
 
 
     @PostMapping("/expor")
-    @ApiOperation(value = "系统管理员批量导入用户信息", httpMethod = "POST")
+    @ApiOperation(value = "系统管理员批量导出用户信息", httpMethod = "POST")
     public AjaxResult expocel(HttpServletResponse response) throws IOException {
         AjaxResult ajaxResult = AjaxResult.success();
         ExcelWriter writer = null;
