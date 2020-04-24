@@ -120,8 +120,8 @@ public class SysAdminController {
         AjaxResult ajaxResult = AjaxResult.success();
         String accounts = StringUtil.getSqlInStrByStrArray(account);
         System.out.println(account);
-        System.out.println(accounts);
-        Integer flag = sysAdminService.delectByAccounts(accounts);
+        //System.out.println(accounts);
+        Integer flag = sysAdminService.delectByAccounts(account);
         if(flag!=0){
             ajaxResult.put("message", "用户删除成功");
             ajaxResult.put("success", true);
