@@ -30,5 +30,5 @@ public interface SysUserMapper {
 
     Page<SysUser> likeByKeywords(String keywords);
 
-    Integer delectByAccounts(String[] accounts);
+    Integer delectByAccounts(String accounts);
 }

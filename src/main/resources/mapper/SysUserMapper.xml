@@ -134,9 +134,7 @@
     DELETE  FROM sys_user
     where 1 = 1
     and account in
-    <foreach item="accounts" collection="array" open="(" separator="," close=")">
-      #{accounts}
-    </foreach>
+      ${_parameter}
   </delete>
   <insert id="insert" parameterType="com.xhjsj.domain.SysUser">
     insert into sys_user (ID, ACCOUNT, PASSWORD, 

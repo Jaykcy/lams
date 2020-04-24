@@ -119,9 +119,9 @@ public class SysAdminController {
         //如果id中不包含， 则为单个删除，否则需要遍历批量删除
         AjaxResult ajaxResult = AjaxResult.success();
         String accounts = StringUtil.getSqlInStrByStrArray(account);
-        System.out.println(account);
-        //System.out.println(accounts);
-        Integer flag = sysAdminService.delectByAccounts(account);
+        System.out.println(accounts);
+        Integer flag = sysAdminService.delectByAccounts(accounts);
+        //Integer flag = 0;
         if(flag!=0){
             ajaxResult.put("message", "用户删除成功");
             ajaxResult.put("success", true);

@@ -212,7 +212,7 @@
     update push
     set readed = true
     where 1 = 1
-    and id in #{ids}
+    and id in ${_parameter}
   </update>
   <update id="updateByExampleSelective" parameterType="map" >
     update push

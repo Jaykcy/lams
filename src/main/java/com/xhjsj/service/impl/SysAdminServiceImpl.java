@@ -8,7 +8,6 @@ import com.xhjsj.mapper.*;
 import com.xhjsj.repository.AdminInfoRepository;
 import com.xhjsj.repository.StudentApplyRepository;
 import com.xhjsj.service.SysAdminService;
-import com.xhjsj.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,7 +74,7 @@ public class SysAdminServiceImpl implements SysAdminService {
 
     @Override
     public Integer delectByAccounts(String accounts) {
-        return sysUserMapper.delectByAccounts(StringUtil.toStrArray(accounts));
+        return sysUserMapper.delectByAccounts(accounts);
     }
     @Override
     public Integer upSysUser(SysUser sysuser) {

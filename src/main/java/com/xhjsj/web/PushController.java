@@ -41,7 +41,8 @@ public class PushController {
     @ApiImplicitParam(name = "id", value = "推送内容ID（包含批量更新）", defaultValue = "", required = true)
     public AjaxResult updateReaded(@RequestParam(value = "id", required = true) String ids) {
         AjaxResult ajaxResult = new AjaxResult();
-        String id = StringUtil.getSqlInStrByStrArray(ids);
+        String id = StringUtil.getSqlInIntByStrArray(ids);
+        System.out.println(id);
         Integer flag = pushService.updateReaded(id);
         if(flag!=0){
             ajaxResult.put("result", "Y");

@@ -26,9 +26,30 @@ public class StringUtil {
         return temp.toString();
     }
 
+    public static String getSqlInIntByStrArray(String str) {
+        StringBuffer temp = new StringBuffer();
+        if(StringUtils.isEmpty(str)){
+            return "('')";
+        }
+        temp.append("(");
+        if(StringUtils.isNotEmpty(str)){
+            String[] strArray=str.split(",");
+            if (strArray != null && strArray.length > 0 ) {
+                for (int i = 0; i < strArray.length; i++) {
+                    temp.append(strArray[i]);
+                    if (i !=  (strArray.length-1) ) {
+                        temp.append(",");
+                    }
+                }
+            }
+        }
+        temp.append(")");
+        return temp.toString();
+    }
+
     public static String[] toStrArray(String str)
     {
-        return toStrArray(",", str);
+        return toStrArray(",",str);
     }
 
     /**
@@ -42,4 +63,15 @@ public class StringUtil {
     {
         return str.split(split);
     }
+
+    public static String stringArray2Strin(String[] str) {
+
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < str.length; i++) {
+            sb.append("'").append(str[i]).append("'").append(",");
+        }
+        return sb.toString().substring(0, sb.length() - 1);
+    }
+
+
 }
