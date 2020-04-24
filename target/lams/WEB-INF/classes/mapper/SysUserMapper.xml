@@ -131,9 +131,12 @@
   </delete>
 
   <delete id="delectByAccounts" parameterType="java.lang.String">
-    DELETE  FROM sys_user s
-    where 1=1
-    and s.account in #{accounts}
+    DELETE  FROM sys_user
+    where 1 = 1
+    and account in
+    <foreach item="accounts" collection="array" open="(" separator="," close=")">
+      #{accounts}
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.xhjsj.domain.SysUser">
     insert into sys_user (ID, ACCOUNT, PASSWORD, 
