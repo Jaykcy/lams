@@ -1,6 +1,8 @@
 package com.xhjsj.web;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.xhjsj.domain.StudentApply;
 import com.xhjsj.domain.SysUser;
 import com.xhjsj.domain.TeacherApply;
 import com.xhjsj.repository.StudentApplyRepository;
@@ -187,4 +189,39 @@ public class CommonController {
         ajaxResult.put("success", true);
         return null;
     }
+
+
+    @GetMapping("/getExpInfo")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "account", value = "用户名", required = true, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "role", value = "角色", required = true, paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "date", value = "日期", required = true, paramType = "query", dataType = "String")
+    })
+    @ApiOperation(value = "根据账号，角色，日期查询实验信息", httpMethod = "GET")
+    public AjaxResult getExpInfo(@RequestParam(value = "account", required = true)String account,
+                                 @RequestParam(value = "role", required = true)String role,
+                                 @RequestParam(value = "date", required = true)String date){
+        AjaxResult ajaxResult=new AjaxResult();
+        if("student".equals(role)){
+            Page<StudentApply> studentApply = studentApplyService.findByAccount(account);
+            String teaApplyReq = studentApply.get(0).getAttriText01();
+            List<TeacherApply> teacherApply = teacherApplyService.getExpInfo(teaApplyReq,date);
+            //查询指定日期下的学生实验信息
+            if(teacherApply!=null){
+                ajaxResult.put("dataList", teacherApply);
+
+            }
+            ajaxResult.put("result", "Y");
+            ajaxResult.put("message", "学生实验申请详细查询成功");
+            ajaxResult.put("success", true);
+        }else{
+            //查询指定日期下的教师实验信息
+            ajaxResult.put("result", "Y");
+            ajaxResult.put("message", "学生实验申请模糊查询成功");
+            ajaxResult.put("success", true);
+        }
+        return ajaxResult;
+    }
+
+
 }

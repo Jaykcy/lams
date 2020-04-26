@@ -19,4 +19,6 @@ public interface StudentApplyService {
     Page<StudentApply> findByKeywords(String keywords, Integer pageNum);
 
     List<StudentApply> findBysNumberAndAttriText01(String sNumber,String tApplyReqNum);
+
+    Page<StudentApply> findByAccount(String account);
 }

@@ -72,4 +72,12 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         criteria.andStatusNotLike("取消");
         return studentApplyMapper.selectByExample(studentApplyExample);
     }
+
+    @Override
+    public Page<StudentApply> findByAccount(String account) {
+        StudentApplyExample studentApplyExample = new StudentApplyExample();
+        StudentApplyExample.Criteria criteria = studentApplyExample.createCriteria();
+        criteria.andSNumberEqualTo(account);
+        return studentApplyMapper.selectByExample(studentApplyExample);
+    }
 }

@@ -40,4 +40,6 @@ public interface TeacherApplyMapper {
 
     int updateTeasStatus(String reqNumber, String status);
 
+    List<TeacherApply> getExpInfo(String reqNumber,String date);
+
 }

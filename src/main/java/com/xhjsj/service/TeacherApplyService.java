@@ -33,6 +33,8 @@ public interface TeacherApplyService {
 
     List<TeacherApply> queryExpApplyT();
 
+    List<TeacherApply> getExpInfo(String reqNumber,String date);
+
 
 
 }

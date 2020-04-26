@@ -162,6 +162,11 @@ public class TeacherApplyServiceImpl implements TeacherApplyService {
 }
 
     @Override
+    public List<TeacherApply> getExpInfo(String reqNumber, String date) {
+        return teacherApplyMapper.getExpInfo(reqNumber,date);
+    }
+
+    @Override
     public TeacherApply save(TeacherApply apply) {
         TeacherApply save = teacherApplyRepository.save(apply);
         return save;

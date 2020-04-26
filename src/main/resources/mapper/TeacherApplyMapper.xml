@@ -123,6 +123,13 @@
     </where>
   </select>
 
+  <select id="getExpInfo" resultMap="BaseResultMap">
+    SELECT * FROM t_e_apply t
+    <where>
+      t.req_number = #{reqNumber} and t.s_date = #{date} or t.attri_text01 = #{reqNumber} and t.s_date = #{date}
+    </where>
+  </select>
+
   <select id="findExpDetailByT" resultMap="BaseResultMap">
     SELECT * FROM t_e_apply t
     <where>
@@ -131,10 +138,10 @@
   </select>
 
   <select id="timeSelect2" resultMap="BaseResultMap">
-    SELECT r_number FROM t_e_apply
+    SELECT r_number FROM t_e_applyfindExpDetailByT
     <where>
-      ((s_date BETWEEN #{sDate} AND #{eDate}) AND (s_time BETWEEN #{sTime} AND #{eTime}))
-      OR  ((e_date BETWEEN #{sDate} AND #{eDate}) AND (e_time BETWEEN #{sTime} AND #{eTime}))
+      ((s_date BETWEEN #{sDate} AND #{eDate}) AND (s_time &gt; #{sTime} AND s_time &lt; #{eTime}))
+      OR  ((e_date BETWEEN #{sDate} AND #{eDate}) AND (e_time &gt; #{sTime} AND e_time &lt; #{eTime}))
       AND e_date>=CURDATE()
     </where>
   </select>
