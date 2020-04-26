@@ -100,8 +100,9 @@ public class SysAdminController {
             //e.printStackTrace();
             AjaxResult ajaxResult = AjaxResult.success();
             ajaxResult.put("message", sysuser.getRole()+":"+sysuser.getUserName()+"添加失败");
-            ajaxResult.put("success", true);
-            ajaxResult.put("result", "Y");
+            ajaxResult.put("extraInformation", "用户:"+sysuser.getAccount()+"已存在");
+            ajaxResult.put("success", false);
+            ajaxResult.put("result", "N");
             return ajaxResult;
         }
         AjaxResult ajaxResult = AjaxResult.success();
