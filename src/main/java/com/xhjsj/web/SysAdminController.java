@@ -150,15 +150,15 @@ public class SysAdminController {
     /*******************系统管理员**************************/
 
 
-    @PostMapping("/expor")
-    @ApiOperation(value = "系统管理员批量导出用户信息", httpMethod = "POST")
+    @GetMapping("/expor")
+    @ApiOperation(value = "系统管理员批量导出用户信息", httpMethod = "GET")
     public AjaxResult expocel(HttpServletResponse response) throws IOException {
         AjaxResult ajaxResult = AjaxResult.success();
         ExcelWriter writer = null;
         OutputStream outputStream = response.getOutputStream();
         try {
             //添加响应头信息
-            response.setHeader("Content-disposition", "attachment; filename=" + "用户信息.xls");
+            response.setHeader("Content-disposition", "attachment; filename=" + "SysUser.xls");
             response.setContentType("application/msexcel;charset=UTF-8");//设置类型
             response.setHeader("Pragma", "No-cache");//设置头
             response.setHeader("Cache-Control", "no-cache");//设置头
@@ -178,6 +178,8 @@ public class SysAdminController {
             writer.write(sysUserList, sheet);
             writer.finish();
             outputStream.flush();
+            outputStream.close();
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

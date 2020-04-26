@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -60,6 +61,7 @@ public class TestController {
     //easyexcel会帮助我们读取数据.我们再将读取的数据封装到List中,
     //再在控制器中,获取easyexcel帮我们读取到的数据,在对数据进行类型转换和封装,最后插入到数据库即可.
     @RequestMapping("/import")
+    @ResponseBody
     public AjaxResult importExcel(@RequestParam("file") MultipartFile file) throws IOException {
         System.out.println("导入成功");
         InputStream inputStream = file.getInputStream();
@@ -75,13 +77,19 @@ public class TestController {
 
         List<SysUser> catagoryList = new ArrayList<SysUser>();
         SysUser sysuser = new SysUser();
-
+        AjaxResult ajaxResult = AjaxResult.success();
         //转换数据类型,并插入到数据库
         for (int i = 0; i < list.size(); i++) {
             sysuser = (SysUser) list.get(i);
-            sysUserService.inserSysUser(sysuser);
+            try {
+                sysUserService.inserSysUser(sysuser);
+            } catch (Exception e) {
+                ajaxResult.put("result", "N");
+                ajaxResult.put("message", "用户信息导入失败，失败原因：用户表中已有相关用户，请检查后重新上传！");
+                ajaxResult.put("success", false);
+                return ajaxResult;
+            }
         }
-        AjaxResult ajaxResult = AjaxResult.success();
         ajaxResult.put("dataList", list);
         ajaxResult.put("result", "Y");
         ajaxResult.put("message", "用户信息导入成功！");

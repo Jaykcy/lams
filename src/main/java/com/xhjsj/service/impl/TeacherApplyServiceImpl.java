@@ -118,7 +118,12 @@ public class TeacherApplyServiceImpl implements TeacherApplyService {
         teacriteria.andENameEqualTo(e_name);
         List<TeacherApply> teacherApply = teacherApplyMapper.selectByExample(teacherApplyExample);
         Integer beforePer = teacherApply.get(0).getrNowPer();
-        Integer nowPer = beforePer + 1;
+        Integer nowPer = 0;
+        if("申请通过(教师)".equals(status)){
+            nowPer = beforePer + 1;
+        }else{
+            nowPer = beforePer;
+        }
         Integer maxPer=teacherApply.get(0).getrMaxPer();
         System.out.println(nowPer);
         System.out.println(maxPer);
