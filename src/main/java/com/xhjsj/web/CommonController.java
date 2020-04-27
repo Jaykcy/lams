@@ -209,15 +209,16 @@ public class CommonController {
             //查询指定日期下的学生实验信息
             if(teacherApply!=null){
                 ajaxResult.put("dataList", teacherApply);
-
             }
             ajaxResult.put("result", "Y");
             ajaxResult.put("message", "学生实验申请详细查询成功");
             ajaxResult.put("success", true);
         }else{
+            List<TeacherApply> teacherApplies = teacherApplyService.findByAccount(account, date);
             //查询指定日期下的教师实验信息
+            ajaxResult.put("dataList", teacherApplies);
             ajaxResult.put("result", "Y");
-            ajaxResult.put("message", "学生实验申请模糊查询成功");
+            ajaxResult.put("message", "教师实验申请详细查询成功");
             ajaxResult.put("success", true);
         }
         return ajaxResult;

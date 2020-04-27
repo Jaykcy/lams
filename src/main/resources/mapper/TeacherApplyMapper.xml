@@ -130,6 +130,13 @@
     </where>
   </select>
 
+  <select id="findByAccount" resultMap="BaseResultMap">
+    SELECT * FROM t_e_apply t
+    <where>
+      t.t_number = #{account} and t.s_date = #{date} and t.status = '申请通过(管理员)'
+    </where>
+  </select>
+
   <select id="findExpDetailByT" resultMap="BaseResultMap">
     SELECT * FROM t_e_apply t
     <where>
@@ -138,7 +145,7 @@
   </select>
 
   <select id="timeSelect2" resultMap="BaseResultMap">
-    SELECT r_number FROM t_e_applyfindExpDetailByT
+    SELECT r_number FROM t_e_apply t
     <where>
       ((s_date BETWEEN #{sDate} AND #{eDate}) AND (s_time &gt; #{sTime} AND s_time &lt; #{eTime}))
       OR  ((e_date BETWEEN #{sDate} AND #{eDate}) AND (e_time &gt; #{sTime} AND e_time &lt; #{eTime}))

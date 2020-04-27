@@ -156,7 +156,7 @@ public class TeacherApplyServiceImpl implements TeacherApplyService {
         TeacherApplyExample.Criteria criteria = teacherApplyExample.createCriteria();
         criteria.andStatusEqualTo("申请通过(管理员)");
         criteria.andAttriText01EqualTo("0");
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         criteria.andEDateGreaterThan((DateUtils.stringToDate(df.format(new Date()))));
         return teacherApplyMapper.selectByExample(teacherApplyExample);
 }
@@ -164,6 +164,11 @@ public class TeacherApplyServiceImpl implements TeacherApplyService {
     @Override
     public List<TeacherApply> getExpInfo(String reqNumber, String date) {
         return teacherApplyMapper.getExpInfo(reqNumber,date);
+    }
+
+    @Override
+    public List<TeacherApply> findByAccount(String account, String date) {
+        return teacherApplyMapper.findByAccount(account, date);
     }
 
     @Override
