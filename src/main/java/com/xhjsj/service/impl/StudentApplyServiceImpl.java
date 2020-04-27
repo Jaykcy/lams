@@ -78,6 +78,7 @@ public class StudentApplyServiceImpl implements StudentApplyService {
         StudentApplyExample studentApplyExample = new StudentApplyExample();
         StudentApplyExample.Criteria criteria = studentApplyExample.createCriteria();
         criteria.andSNumberEqualTo(account);
+        criteria.andStatusEqualTo("申请通过(管理员)");
         return studentApplyMapper.selectByExample(studentApplyExample);
     }
 }
