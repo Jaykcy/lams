@@ -70,6 +70,7 @@ public class TeacherApplyServiceImpl implements TeacherApplyService {
     public List<TeacherApply> likeQueryExpApplyT(String tNum, String tName, String status, String rNum, String eName) {
         TeacherApplyExample teacherApplyExample = new TeacherApplyExample();
         TeacherApplyExample.Criteria criteria = teacherApplyExample.createCriteria();
+        criteria.andAttriNumber01EqualTo(1);
         if(tNum!=null){
             criteria.andTNumberLike(tNum);
         }
