@@ -145,11 +145,11 @@
       ATTRI_TEXT01, ATTRI_TEXT02, ATTRI_TEXT03, 
       ATTRI_NUMBER01, ATTRI_NUMBER02, ATTRI_NUMBER03
       )
-    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, 'e10adc3949ba59abbe56e057f20f883e',
       #{userName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{employeeNumber,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{uClass,jdbcType=VARCHAR}, 
       #{role,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
-      #{isUsed,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{updatedDate,jdbcType=TIMESTAMP}, 
+      'Y', #{createdDate,jdbcType=TIMESTAMP}, #{updatedDate,jdbcType=TIMESTAMP},
       #{attriText01,jdbcType=VARCHAR}, #{attriText02,jdbcType=VARCHAR}, #{attriText03,jdbcType=VARCHAR}, 
       #{attriNumber01,jdbcType=INTEGER}, #{attriNumber02,jdbcType=INTEGER}, #{attriNumber03,jdbcType=INTEGER}
       )
