@@ -33,7 +33,7 @@ public class TestController {
     JpushService jpushService;
 
     @RequestMapping("/getSysUser")
-    public String list(Model model, @RequestParam(value = "pageNum", defaultValue = "0") int pageNum, @RequestParam(value = "pageSize", defaultValue = "4") int pageSize) {
+    public String list(Model model, @RequestParam(value = "pageNum", defaultValue = "0") int pageNum, @RequestParam(value = "pageSize", defaultValue = "8") int pageSize) {
         System.out.println("============================");
         Page<SysUser> users=sysUserService.getSysUserList(pageNum, pageSize);
         System.out.println("总页数" + users.getTotalPages());

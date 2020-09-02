@@ -42,4 +42,6 @@ public interface TeacherApplyMapper {
 
     List<TeacherApply> getExpInfo(String reqNumber,String date);
 
+    List<TeacherApply> findByAccount(String account, String date);
+
 }

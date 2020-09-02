@@ -204,21 +204,38 @@ public class CommonController {
         AjaxResult ajaxResult=new AjaxResult();
         if("student".equals(role)){
             Page<StudentApply> studentApply = studentApplyService.findByAccount(account);
-            String teaApplyReq = studentApply.get(0).getAttriText01();
-            List<TeacherApply> teacherApply = teacherApplyService.getExpInfo(teaApplyReq,date);
+            String teaApplyReq = "";
+            List<TeacherApply> teacherApply = null;
+            if(studentApply.size()>0){
+                teaApplyReq = studentApply.get(0).getAttriText01();
+                teacherApply = teacherApplyService.getExpInfo(teaApplyReq,date);
+            }
+            System.out.println(teaApplyReq);
             //查询指定日期下的学生实验信息
             if(teacherApply!=null){
                 ajaxResult.put("dataList", teacherApply);
-
+                ajaxResult.put("result", "Y");
+                ajaxResult.put("message", "学生实验申请详细查询成功");
+                ajaxResult.put("success", true);
+            }else{
+                ajaxResult.put("result", "N");
+                ajaxResult.put("message", "未查询出该日期下的学生实验申请明细！");
+                ajaxResult.put("success", false);
             }
-            ajaxResult.put("result", "Y");
-            ajaxResult.put("message", "学生实验申请详细查询成功");
-            ajaxResult.put("success", true);
         }else{
+            List<TeacherApply> teacherApplies = teacherApplyService.findByAccount(account, date);
             //查询指定日期下的教师实验信息
-            ajaxResult.put("result", "Y");
-            ajaxResult.put("message", "学生实验申请模糊查询成功");
-            ajaxResult.put("success", true);
+            if(teacherApplies.size()>0){
+                ajaxResult.put("dataList", teacherApplies);
+                ajaxResult.put("result", "Y");
+                ajaxResult.put("message", "教师实验申请详细查询成功");
+                ajaxResult.put("success", true);
+            }else{
+                ajaxResult.put("result", "N");
+                ajaxResult.put("message", "未查询出该日期下的教师实验申请明细！");
+                ajaxResult.put("success", false);
+            }
+
         }
         return ajaxResult;
     }
