@@ -50,6 +50,24 @@ public class SysAdminServiceImpl implements SysAdminService {
     public Page<RoomInfo> selectAllRoomInfo() {
         return roomInfoMapper.selectByExample(null);
     }
+    @Override
+    public Integer upRoomInfo(Integer id,RoomInfo roomInfo) {
+        RoomInfoExample roomInfoExample = new RoomInfoExample();
+        roomInfoExample.createCriteria().andIdEqualTo(id);
+        return roomInfoMapper.updateByExampleSelective(roomInfo,roomInfoExample);
+    }
+
+    @Override
+    public Integer addRoomInfo(RoomInfo roomInfo) {
+        return roomInfoMapper.insert(roomInfo);
+    }
+
+    @Override
+    public Integer delRoomInfo(Integer id) {
+        RoomInfoExample roomInfoExample = new RoomInfoExample();
+        roomInfoExample.createCriteria().andIdEqualTo(id);
+        return roomInfoMapper.deleteByExample(roomInfoExample);
+    }
 
     @Override
     public List<TeacherInfo> selectTeaInfoByTname(String t_name) {

@@ -4,6 +4,7 @@ package com.xhjsj.web;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.xhjsj.domain.RoomInfo;
 import com.xhjsj.domain.SysUser;
 import com.xhjsj.repository.SysUserRepository;
 import com.xhjsj.service.SysAdminService;
@@ -60,8 +61,56 @@ public class SysAdminController {
         ajaxResult.put("result", "Y");
         return ajaxResult;
     }
-    //2.系统管理员增加实验室项目信息（实验信息，教室信息）
-    //3.系统管理员删除实验室项目信息
+
+    //系统管理员修改实验室信息
+    @PostMapping("/upRoomInfo")
+    @ApiOperation(value = "系统管理员修改实验室信息", httpMethod = "POST")
+    public AjaxResult upRoomInfo(@RequestBody RoomInfo roomInfo){
+        AjaxResult ajaxResult = AjaxResult.success();
+        Integer id = roomInfo.getId();
+        if(sysAdminService.upRoomInfo(id,roomInfo)!=0){
+            ajaxResult.put("message", "实验室信息更新成功");
+            ajaxResult.put("success", true);
+            ajaxResult.put("result", "Y");
+        }else{
+            ajaxResult.put("message", "实验室信息更新失败，请检查！");
+            ajaxResult.put("success", false);
+            ajaxResult.put("result", "N");
+        }
+        return ajaxResult;
+    }
+    //2.系统管理员增加实验室信息（实验信息，教室信息）
+    @PostMapping("/addRoomInfo")
+    @ApiOperation(value = "系统管理员新增实验室信息", httpMethod = "POST")
+    public AjaxResult addRoomInfo(@RequestBody RoomInfo roomInfo){
+        AjaxResult ajaxResult = AjaxResult.success();
+        if(sysAdminService.addRoomInfo(roomInfo)!=0){
+            ajaxResult.put("message", "实验室信息新增成功");
+            ajaxResult.put("success", true);
+            ajaxResult.put("result", "Y");
+        }else{
+            ajaxResult.put("message", "实验室信息新增失败，请检查！");
+            ajaxResult.put("success", false);
+            ajaxResult.put("result", "N");
+        }
+        return ajaxResult;
+    }
+    //3.系统管理员删除实验室信息
+    @PostMapping("/delRoomInfo")
+    @ApiOperation(value = "系统管理员删除实验室信息", httpMethod = "POST")
+    public AjaxResult addRoomInfo(@RequestParam(value = "", required = true) String id){
+        AjaxResult ajaxResult = AjaxResult.success();
+        if(sysAdminService.delRoomInfo(Integer.valueOf(id))!=0){
+            ajaxResult.put("message", "实验室信息删除成功");
+            ajaxResult.put("success", true);
+            ajaxResult.put("result", "Y");
+        }else{
+            ajaxResult.put("message", "实验室信息删除失败，请检查！");
+            ajaxResult.put("success", false);
+            ajaxResult.put("result", "N");
+        }
+        return ajaxResult;
+    }
     //4.系统管理员修改实验室项目信息
     //模糊查询用户表 参数：关键字，分页参数
     @GetMapping("/likeQueryUserInfo")

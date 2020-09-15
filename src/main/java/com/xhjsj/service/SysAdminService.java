@@ -40,6 +40,12 @@ public interface SysAdminService {
 
     Page<RoomInfo> selectAllRoomInfo();
 
+    Integer upRoomInfo(Integer id,RoomInfo roomInfo);
+
+    Integer addRoomInfo(RoomInfo roomInfo);
+
+    Integer delRoomInfo(Integer id);
+
     List<TeacherInfo> selectTeaInfoByTname(String t_name);
 
     List<StudentInfo> selectStuInfoBySname(String s_name);
