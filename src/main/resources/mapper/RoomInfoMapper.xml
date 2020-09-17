@@ -107,6 +107,7 @@
                  open="(" separator="," close=")">
             #{item}
         </foreach>
+        and attri_text01 = ‘1’
         </if>
     </select>
 
