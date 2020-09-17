@@ -105,7 +105,7 @@ public class SysAdminController {
             ajaxResult.put("success", true);
             ajaxResult.put("result", "Y");
         }else{
-            ajaxResult.put("message", "实验室信息删除失败，请检查！");
+            ajaxResult.put("message", "实验室信息删除失败，该实验室目前已有相关的实验被占用！");
             ajaxResult.put("success", false);
             ajaxResult.put("result", "N");
         }

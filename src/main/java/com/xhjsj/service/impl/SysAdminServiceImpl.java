@@ -8,16 +8,21 @@ import com.xhjsj.mapper.*;
 import com.xhjsj.repository.AdminInfoRepository;
 import com.xhjsj.repository.StudentApplyRepository;
 import com.xhjsj.service.SysAdminService;
+import com.xhjsj.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class SysAdminServiceImpl implements SysAdminService {
     @Resource
     private StudentInfoMapper    studentInfoMapper;
+    @Resource
+    private TeacherApplyMapper   teacherApplyMapper;
     @Resource
     private TeacherInfoMapper    teacherInfoMapper;
     @Resource
@@ -64,8 +69,16 @@ public class SysAdminServiceImpl implements SysAdminService {
 
     @Override
     public Integer delRoomInfo(Integer id) {
+        TeacherApplyExample teacherApplyExample = new TeacherApplyExample();
         RoomInfoExample roomInfoExample = new RoomInfoExample();
         roomInfoExample.createCriteria().andIdEqualTo(id);
+        Page<RoomInfo> roomInfos = roomInfoMapper.selectByExample(roomInfoExample);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        teacherApplyExample.createCriteria().andRNumberEqualTo(roomInfos.get(0).getrNumber()).andSDateGreaterThanOrEqualTo(DateUtils.stringToDate(df.format(new Date())));
+        Page<TeacherApply> teacherApplies = teacherApplyMapper.selectByExample(teacherApplyExample);
+        if(teacherApplies.size()>0){
+            return 0;
+        }
         return roomInfoMapper.deleteByExample(roomInfoExample);
     }
 
